@@ -8,5 +8,5 @@ root.render(
   <React.StrictMode>
     <App />
     <div>Yeah My Kanban</div>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -25,10 +25,12 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 const UPDATE_INTERVAL = MINUTE;
 
-const KanbanCard = ({ title, status, onDragStart, onRemove }) => {
+function KanbanCard({
+  title, status, onDragStart, onRemove,
+}) {
   const [displayTime, setDisplayTime] = useState(status);
-  const isAdmin = useContext(AdminContext)
-  
+  const isAdmin = useContext(AdminContext);
+
   useEffect(() => {
     const updateDisplayTime = () => {
       const timePassed = new Date() - new Date(status);
@@ -46,7 +48,7 @@ const KanbanCard = ({ title, status, onDragStart, onRemove }) => {
     const intervalId = setInterval(updateDisplayTime, UPDATE_INTERVAL);
     updateDisplayTime();
 
-    return function cleanUp () {
+    return function cleanUp() {
       clearInterval(intervalId);
     };
   }, [status]);
@@ -64,12 +66,13 @@ const KanbanCard = ({ title, status, onDragStart, onRemove }) => {
         text-align: right;
         font-size: 0.8rem;
         color: #333;
-      `}>
+      `}
+      >
         {displayTime}
-        {isAdmin && onRemove && (<button onClick={() => onRemove({title})}>X</button>)}
+        {isAdmin && onRemove && (<button onClick={() => onRemove({ title })}>X</button>)}
       </div>
     </li>
   );
-};
+}
 
 export default KanbanCard;
